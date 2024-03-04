@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/css/default-main.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="~/js/kendo.all.min.js"></script>
+    <script src="~/js/kendo-ui-license.js"></script>
+</head>
+<body>
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
+
+<div id="example">
+    <div id="grid"></div>
+    <script>
+        $(document).ready(function () {
+                dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: "http://localhost:5268/Home/KarlayaCode/",
+                            dataType: "json"
+                        }
+                        
+                    },
+                    batch: true,
+                    pageSize: 20,
+                    autoSync: true,
+                    aggregate: [{
+                        field: "TotalSales",
+                        aggregate: "sum"
+                    }],
+                    group: {
+                        field: "Category.CategoryName",
+                        dir: "desc",
+                        aggregates: [
+                            { field: "TotalSales", aggregate: "sum" }
+                        ]
+                    },
+                    schema: {
+                        model: {
+                            id: "ProductID",
+                            fields: {
+                                TargetSales: { type: "number", editable: false },
+                                LastSupply: { type: "date" },
+                                UnitPrice: { type: "number" },
+                                UnitsInStock: { type: "number" },
+                                
+                                
+                            }
+                        }
+                    }
+                });
+
+            $("#grid").kendoGrid({
+                dataSource: dataSource,
+                columnMenu: {
+                    filterable: false
+                },
+                height: 680,
+                editable: "incell",
+                pageable: true,
+                sortable: true,
+                navigatable: true,
+                resizable: true,
+                reorderable: true,
+                groupable: true,
+                filterable: true,
+                dataBound: onDataBound,
+                toolbar: ["excel", "pdf", "search"],
+                columns: [ {
+                    field: "ProductName",
+                    title: "Product Name",
+                    template: "<div class='product-photo' style='background-image: url(../content/web/foods/#:data.ProductID#.jpg);'></div><div class='product-name'>#: ProductName #</div>",
+                    width: 300
+                }],
+            });
+        });
+
+        function onDataBound(e) {
+            var grid = this;
+            grid.table.find("tr").each(function () {
+                var dataItem = grid.dataItem(this);
+                var themeColor = dataItem.Discontinued ? 'success' : 'error';
+                var text = dataItem.Discontinued ? 'available' : 'not available';
+
+                $(this).find(".badgeTemplate").kendoBadge({
+                    themeColor: themeColor,
+                    text: text,
+                });
+
+                $(this).find(".rating").kendoRating({
+                    min: 1,
+                    max: 5,
+                    label: false,
+                    selection: "continuous"
+                });
+
+                $(this).find(".sparkline-chart").kendoSparkline({
+                    legend: {
+                        visible: false
+                    },
+                    data: [dataItem.TargetSales],
+                    type: "bar",
+                    chartArea: {
+                        margin: 0,
+                        width: 180,
+                        background: "transparent"
+                    },
+                    seriesDefaults: {
+                        labels: {
+                            visible: true,
+                            format: '{0}%',
+                            background: 'none'
+                        }
+                    },
+                    categoryAxis: {
+                        majorGridLines: {
+                            visible: false
+                        },
+                        majorTicks: {
+                            visible: false
+                        }
+                    },
+                    valueAxis: {
+                        type: "numeric",
+                        min: 0,
+                        max: 130,
+                        visible: false,
+                        labels: {
+                            visible: false
+                        },
+                        minorTicks: { visible: false },
+                        majorGridLines: { visible: false }
+                    },
+                    tooltip: {
+                        visible: false
+                    }
+                });
+
+                kendo.bind($(this), dataItem);
+            });
+        }
+
+        function returnFalse() {
+            return false;
+        }
+
+       
+    </script>
+
+    <style type="text/css">
+        .customer-photo {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-size: 32px 35px;
+            background-position: center center;
+            vertical-align: middle;
+            line-height: 32px;
+            box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
+            margin-left: 5px;
+        }
+
+        .customer-name {
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 32px;
+            padding-left: 3px;
+        }
+
+        .k-grid tr .checkbox-align {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .product-photo {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-size: 32px 35px;
+            background-position: center center;
+            vertical-align: middle;
+            line-height: 32px;
+            box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
+            margin-right: 5px;
+        }
+
+        .product-name {
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 32px;
+            padding-left: 3px;
+        }
+
+        .k-rating-container .k-rating-item {
+            padding: 4px 0;
+        }
+
+        .k-rating-container .k-rating-item .k-icon {
+            font-size: 16px;
+        }
+
+        .dropdown-country-wrap {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .dropdown-country-wrap img {
+            margin-right: 10px;
+        }
+
+        #grid .k-grid-edit-row > td > .k-rating {
+            margin-left: 0;
+            width: 100%;
+        }
+    </style>
+</div>
+
+
+
+</body>
+</html>

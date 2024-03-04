@@ -1,0 +1,517 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <link href="~/css/default-main.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="~/js/kendo.all.min.js"></script>
+    <script src="~/js/kendo-ui-license.js"></script>
+
+
+</head>
+@* <body>
+
+<div class="k-d-flex k-justify-content-center" style="padding-top: 54px;">
+<div class="k-w-300">
+<label for="cap">Customize your Kendo Cap</label>
+<div id="cap" class="black-cap"></div>
+</br>
+</br>
+
+<label for="color">Cap Color</label>
+<input id="color" value="1"/>
+</br>
+</br>
+
+<label for="size">Cap Size</label>
+<select id="size" >
+<option>S - 6 3/4"</option>
+<option>M - 7 1/4"</option>
+<option>L - 7 1/8"</option>
+<option>XL - 7 5/8"</option>
+</select>
+
+
+
+<button class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md" id="get" style="margin-top: 2em;
+float: right;">Customize</button>
+</div>
+</div>
+<label for="size">Kings Size</label>
+<select id="kings" >
+<option>Royal</option>
+<option>Presidential</option>
+<option>PMtial</option>
+
+</select>
+<style>
+#cap {
+width: 242px;
+height: 225px;
+margin: 20px auto;
+background-image: url('~/images/peakpx.jpg');
+background-repeat: no-repeat;
+background-color: transparent;
+}
+.black-cap {
+background-position: 0 0;
+}
+.grey-cap {
+background-position: 0 -225px;
+}
+.orange-cap {
+background-position: 0 -450px;
+}
+</style>
+
+<script>
+$(document).ready(function() {
+var data = [
+{ text: "Black", value: "1" },
+{ text: "Orange", value: "2" },
+{ text: "Grey", value: "3" }
+];
+
+// create DropDownList from input HTML element
+$("#color").kendoDropDownList({
+dataTextField: "text",
+dataValueField: "value",
+dataSource: data,
+index: 0,
+change: onChange
+});
+
+// create DropDownList from select HTML element
+$("#size").kendoDropDownList();
+
+var color = $("#color").data("kendoDropDownList");
+
+color.select(0);
+var size = $("#size").data("kendoDropDownList");
+
+function onChange() {
+var value = $("#color").val();
+$("#cap")
+.toggleClass("black-cap", value == 1)
+.toggleClass("orange-cap", value == 2)
+.toggleClass("grey-cap", value == 3);
+};
+
+$("#get").click(function() {
+alert('Thank you! Your Choice is:\n\nColor ID: '+color.value()+' and Size: '+size.value());
+});
+$("#kings").kendoDropDownList();
+});
+</script>
+
+
+
+</body> *@
+<h1>खर्च निकासा फाराम </h1>
+
+<form>
+    <div class="headers ">
+        @* //HEADER SECTION OF THE FORM *@
+        <div class="k-d-flex k-justify-content-center" style="padding-top: 54px;">
+            @* First line of Input *@
+            <div class="container ">
+
+                <div class="row">
+                    <div class="k-w-300">
+                        <br>
+                        <label for="mantralaya"> मन्त्रालय / विभाग / कार्यालय:</label>
+                        <input id="mantralaya" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="k-w-300">
+                    <br>
+
+                    <label for="karlaya"> कार्यालय कोड नं:</label>
+                    <input id="karlaya" />
+                </div>
+            </div>
+        </div>
+        @* Second Line of Input *@
+
+        <div class="Container  mt-5">
+            <div class="row">
+                <div class="col-sm">
+                    <div>
+                        <label>आर्थिक वर्ष :</label>
+                        <input id="Arthik_barsa" />
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div>
+                        <label>खर्च निकासा फाराम नं:</label>
+                        <input id="Kharcha_Nikasa_No" />
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div>
+                        <label>खर्च निकासा गरिएका माग फाराम नं.:</label>
+                        <input id="Kharcha_form_number" />
+
+                        @* <form id="exampleform"></form> *@
+
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div>
+                        <label>मितिः</label>
+                        <input id="datetimepicker" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="modules mt-5">
+        <div id="sub_main_info">
+            @* SUB INFORMATIONS *@
+            <div class="container" id="jincy_information">
+                <div class="">
+                    <hr>
+                    <div class="row">
+                        @* <div class="col-1">
+                        @*Serial NO.
+                        <label for="sn">SN:</label>
+                        <input name="sn[]" class="sn">
+                        </div> *@
+                        <div class="col-2">
+                            @*Name.*@
+                            <label for="name">Name:</label>
+                            <input name="name[]" class="name">
+                        </div>
+                        <div class="col-2">
+                            @*Symbol No.*@
+                            <label for="symbol_no">Synbol No:</label>
+                            <input name="symbol_no[]" class="symbol_no">
+                        </div>
+                        <div class="col-2">
+                            @*Specification No.*@
+                            <label for="specification_no">Specification No:</label>
+                            <input name="specification_no[]" class="specification_no">
+                        </div>
+                        <div class="col-2">
+                            @*Akain No.*@
+                            <label for="akin_no">Akain No:</label>
+                            <input name="akin_no[]" class="aking_no">
+                        </div>
+                        <div class="col-2">
+                            @*Quantity*@
+                            <label for="quantity">Quantity:</label>
+                            <input name="quantity[]" class="quantity">
+                        </div>
+                        <div class="col-2">
+                            @*Rate*@
+                            <label for="rate">Rate:</label>
+                            <input name="rate[]" class="rate">
+                        </div>
+                        <div class="col-3">
+                            @*Remarks*@
+                            <label for="remarks">Remarks:</label>
+                            <textarea name="remarks[]" class="remarks"></textarea>
+                        </div>
+                    </div>
+                    <button class="btn btn-info" id="remove_jincy">Remove</button>
+                    <hr>
+                </div>
+
+            </div>
+        </div>
+        <button type="button" id="add_jincy" class="btn btn-info mt-4">Add Malsaman</button>
+    </div>
+    <button type="button" id="submit_button" class="btn btn-info mt-4">submit</button>
+</form>
+<h1 class="mt-5">The Filed Information</h1>
+<hr>
+<div id="grid"></div>
+
+
+
+<script>
+
+    $(document).ready(function () {
+
+        var total_jincy_added = 1;
+        $("#add_jincy").click(function () {
+
+            //var clone = $("#jincy_information").clone();
+            var clone = $(`<div class="container" id="jincy_information">
+                <div class="">
+                    <hr>
+                    <div class="row">
+    @* <div class="col-1">
+                        @*Serial NO.
+                        <label for="sn">SN:</label>
+                        <input name="sn[]" class="sn">
+                        </div> *@
+                        <div class="col-2">
+    @*Name.*@
+                            <label for="name">Name:</label>
+                            <input name="name[]" class="name">
+                        </div>
+                        <div class="col-2">
+    @*Symbol No.*@
+                            <label for="symbol_no">Synbol No:</label>
+                            <input name="symbol_no[]" class="symbol_no">
+                        </div>
+                        <div class="col-2">
+    @*Specification No.*@
+                            <label for="specification_no">Specification No:</label>
+                            <input name="specification_no[]" class="specification_no">
+                        </div>
+                        <div class="col-2">
+    @*Akain No.*@
+                            <label for="akin_no">Akain No:</label>
+                            <input name="akin_no[]" class="aking_no">
+                        </div>
+                        <div class="col-2">
+    @*Quantity*@
+                            <label for="quantity">Quantity:</label>
+                            <input name="quantity[]" class="quantity">
+                        </div>
+                        <div class="col-2">
+    @*Rate*@
+                            <label for="rate">Rate:</label>
+                            <input name="rate[]" class="rate">
+                        </div>
+                        <div class="col-3">
+    @*Remarks*@
+                            <label for="remarks">Remarks:</label>
+                            <textarea name="remarks[]" class="remarks"></textarea>
+                        </div>
+                    </div>
+                    <button class="btn btn-info" id="remove_jincy">Remove</button>
+                    <hr>
+                </div>
+
+            </div>`);
+            clone.appendTo("#sub_main_info");
+            clone.find(".name").kendoTextBox();
+            clone.find(".remarks").kendoTextArea({
+                rows: 4,
+                maxLength: 200,
+                placeholder: "Write Remarks..."
+            });
+            clone.find(".rate").kendoNumericTextBox();
+            clone.find(".quantity").kendoNumericTextBox();
+            clone.find(".aking_no").kendoNumericTextBox();
+            clone.find(".specification_no").kendoNumericTextBox();
+            clone.find(".symbol_no").kendoNumericTextBox(({
+                format: "0"
+            }));
+            clone.find
+            total_jincy_added += 1;
+        });
+
+        $("#mantralaya").kendoDropDownList({
+            dataSource: {
+                data: ["Kathmandu", "Lalitpur", "Bhaktapur", "Kavre", "Toursim Board", "Fewa Lake House"]
+            }
+
+        });
+        $("#karlaya").kendoDropDownList({
+            dataSource: {
+                transport: {
+                    read: {
+                        dataType: "json",
+                        url: "http://localhost:5268/Home/KarlayaCode",
+                    }
+                }
+            }
+
+        });
+
+        $("#Arthik_barsa").kendoDropDownList({ dataSource: { data: [2024, 2023, 2022, 2021, 2020, 2019, 2018] } });
+        $("#Kharcha_Nikasa_No").kendoNumericTextBox();
+        $("#Kharcha_form_number").kendoNumericTextBox();
+        $("#datetimepicker").kendoDatePicker({
+            dateInput: true,
+            startTime: new Date(2023, 1, 3, 8, 30, 0),
+            endTime: new Date(2024, 2, 3, 17,00, 0)
+        });
+
+    @*THE SUBFORM SECTION*@
+            //$(".sn").kendoNumericTextBox();
+            $(".symbol_no").kendoNumericTextBox({
+                format: "0",
+                decimals: 1
+            });
+        $(".specification_no").kendoNumericTextBox();
+        $(".aking_no").kendoNumericTextBox();
+        $(".quantity").kendoNumericTextBox();
+        $(".rate").kendoNumericTextBox();
+        $(".name").kendoTextBox();
+        $(".remarks").kendoTextArea({
+            rows: 4,
+            maxLength: 200,
+            placeholder: "Write Remarks..."
+        });
+
+        $("#sub_main_info").on("click", "#remove_jincy", function () {
+            $(this).parent().remove();
+        });
+        $("#submit_button").click(function () {
+            
+            console.log("clicked");
+            //RETRIVING THE TOP LEVEL INFORMATION
+
+    @* INPUT SN VALUE
+                var snArray = $("input.sn").map(function () {
+                return $(this).val();
+                }).get(); *@
+    @* INPUT NAME VALUE *@
+            var nameArray = $("input.name").map(function () {
+                    return $(this).val();
+                }).get();
+    @* INPUT Symbol_no VALUE *@
+            var symbol_noArray = $("input.symbol_no").map(function () {
+                return $(this).val();
+            }).get();
+    @* INPUT specification_no *@
+             var specification_noArray = $("input.specification_no").map(function () {
+                return $(this).val();
+            }).get();
+    @* INPUT aking_no *@
+            var aking_noArray = $("input.aking_no").map(function () {
+                return $(this).val();
+            }).get();
+    @* INPUT quantity *@
+             var quantityArray = $("input.quantity").map(function () {
+                return $(this).val();
+            }).get();
+    @* INPUT rate *@
+             var rateArray = $("input.rate").map(function () {
+                return $(this).val();
+            }).get();
+    @* INPUT remarksARRAY *@
+            var remarksArray = $("textarea.remarks").map(function () {
+                return $(this).val();
+            }).get();
+
+
+            for (var remark of remarksArray) {
+                console.log(remark + "remark");
+            }
+            for (var nmae of nameArray) {
+                console.log(nmae + "name");
+            }
+    @* for (var i = 0; i < snArray.length; i += 2) {
+                console.log(snArray[i] + "sn");
+                } *@
+
+            for (var i = 0; i < symbol_noArray.length; i += 2) {
+                console.log(symbol_noArray[i] + " symbol");
+            }
+            for (var i = 0; i < specification_noArray.length; i += 2) {
+                console.log(specification_noArray[i] + "spec");
+            }
+            for (var i = 0; i < aking_noArray.length; i += 2) {
+                console.log(aking_noArray[i] + "akin");
+            }
+            for (var i = 0; i < quantityArray.length; i += 2) {
+                console.log(quantityArray[i] + "quantity");
+            }
+            for (var i = 0; i < rateArray.length; i += 2) {
+                console.log(rateArray[i] + "rate");
+            }
+            var data = [];
+            for (var i = 0; i < total_jincy_added; i++) {
+                var obj = {
+    @* SN: snArray[i], *@
+                    SN: i + 1,
+                        Name: nameArray[i],
+                            Symbol_No: symbol_noArray[i],
+                                Specificatin_No: specification_noArray[i],
+                                    Akin_no: aking_noArray[i],
+                                        Quantity: quantityArray[i],
+                                            Rate: rateArray[i],
+                                                Remark: remarksArray[i]
+            };
+            data.push(obj);
+            var form = document.getElementById("sub_main_info");
+        }
+
+
+
+
+            var jsonOBJ = {
+            Mantralaya: $("#mantralaya").val(),
+            OfficeCodeNo: $("#karlaya").val(),
+            FiscalYear: $("#Arthik_barsa").val(),
+            KharchaNikasasNo: $("#Kharcha_Nikasa_No").val(),
+            KharchaNikasasGariakoNo: $("#Kharcha_form_number").val(),
+            Date: $("#datetimepicker").val(),
+           SubForms: data
+        }
+        console.log(jsonOBJ, "this one is the thing brother so why sorry when Haideep Dai is here ");
+        //debugger;
+        $.ajax({
+            url: '@Url.Action("Index", "Form")',
+            type: 'POST',
+            data: jsonOBJ,
+            success: function (jsonOBJ) {
+                // Handle the response data
+                console.log("post return true");
+                //nsole.log(data);
+            },
+            error: function (error) {
+                console.log("Error xxx");
+                console.error('Error:', error);
+            }
+        });
+
+        for (var i = 0; i < data.length; i++) {
+            console.log(data[i], "the length of the js objects");
+        }
+        $("#grid").kendoGrid({
+            dataSource: {
+                data: data,
+                schema: {
+                    model: {
+                        fields: {
+                            SN: { editable: true, nullable: true },
+                            Name: { editable: true },
+                            Symbol_No: { editable: true },
+                            Specificatin_No: { editable: true },
+                            Akin_no: { editable: true },
+                            Quantity: { editable: true },
+                            Rate: { editable: true },
+                            Remark: { editable: true }
+                        }
+                    }
+                }
+    @* data: data.batch: true, // Specify the local data source *@
+             // Number of records to display per page
+                },
+        height: 400, // Set the height of the grid
+        sortable: true, // Enable sorting
+        pageable: true, // Enable paging
+        toolbar: ["save", "cancel"],
+        columns: [
+        { field: "SN", title: "S.N." },
+        { field: "Name", title: "Name" },
+        { field: "Symbol_No", title: "Symbol_No" },
+        { field: "Specificatin_No", title: "Specificatin_No" },
+        { field: "Akin_no", title: "Akin_no" },
+        { field: "Quantity", title: "Quantity" },
+        { field: "Rate", title: "Rate" },
+        { field: "Remark", title: "Remark" },
+        { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }
+    ],
+        editable: "inline"
+            });
+        });
+    });
+</script>
+
+</html>
